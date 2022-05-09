@@ -1,11 +1,9 @@
-const postRepo = require('./PostRepo')
+const itemRepo = require('./ItemRepo')
 const userRepo = require('./UserRepo')
 const tagRepo = require('./TagRepo')
-const imageRepo = require('./ImageRepo')
 
 module.exports = {
-  postRepo,
+  itemRepo,
   userRepo,
   tagRepo,
-  imageRepo,
 }
