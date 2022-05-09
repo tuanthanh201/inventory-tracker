@@ -1,0 +1,31 @@
+input ItemInput {
+  name: String!
+  description: String!
+  image: String!
+  tags: String!
+}
+type Item {
+  id: ID!
+  owner: User!
+  name: String!
+  description: String!
+  image: String
+  tags: [Tag]!
+  createdAt: String!
+}
+type ItemQuery {
+  items: [Item]
+  hasMore: Boolean
+  last: String
+}
+extend type Query {
+  findItemById(item: ID!): Item
+  findAllItems(cursor: ID): ItemQuery
+  findItemsByTerm(term: String!, cursor: ID): ItemQuery
+  findItemsByTag(tag: String!, cursor: ID): ItemQuery
+}
+extend type Mutation {
+  createItem(itemInput: ItemInput!): Item!
+  editItem(itemId: ID!, itemInput: ItemInput!): Item!
+  deleteItem(itemId: ID!): String
+}

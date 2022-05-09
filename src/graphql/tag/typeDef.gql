@@ -1,0 +1,8 @@
+type Tag {
+  id: ID!
+  content: String!
+  createdAt: String!
+}
+extend type Query {
+  findAllTags: [Tag]
+}
