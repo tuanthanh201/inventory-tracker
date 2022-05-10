@@ -202,6 +202,7 @@ class ItemService extends DataSource {
           }
         }
       }
+      return await this.store.itemRepo.save(item)
     } catch (error) {
       throw new Error(error)
     }
