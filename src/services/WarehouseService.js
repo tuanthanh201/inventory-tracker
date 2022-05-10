@@ -1,4 +1,5 @@
 const { DataSource } = require('apollo-datasource')
+const { UserInputError } = require('apollo-server-express')
 const { uploadBase64Image, deleteImages } = require('../S3')
 const validateWarehouseInput = require('../utils/validateWarehouseInput')
 
@@ -32,6 +33,12 @@ class WarehouseService extends DataSource {
     try {
       validateWarehouseInput(warehouseInput)
       const { name, location, description, image } = warehouseInput
+
+      const warehouse = await this.store.warehouseRepo.findOne({name})
+      if (!!warehouse) {
+        throw new UserInputError('Warehouse already exists')
+      }
+
       let newWarehouse = {
         name,
         location,
