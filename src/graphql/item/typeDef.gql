@@ -3,6 +3,7 @@ input ItemInput {
   name: String!
   description: String!
   image: String!
+  quantity: Int!
   tags: String!
 }
 type Item {
@@ -10,6 +11,7 @@ type Item {
   name: String!
   description: String!
   image: String
+  quantity: Int!
   tags: [Tag]!
   createdAt: String!
 }

@@ -18,14 +18,6 @@ const WarehouseSchema = new Schema({
     type: String,
     default: '',
   },
-  inventory: [
-    {
-      item: {
-        type: Schema.Types.ObjectId,
-        ref: 'item',
-      },
-    },
-  ],
   createdAt: {
     type: Date,
     default: Date.now,
