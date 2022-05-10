@@ -1,12 +1,12 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const ItemSchema = new Schema({
-  warehouse: {
-    type: Schema.Types.ObjectId,
-    ref: 'warehouse',
-  },
+const WarehouseSchema = new Schema({
   name: {
+    type: String,
+    required: true,
+  },
+  location: {
     type: String,
     required: true,
   },
@@ -18,22 +18,18 @@ const ItemSchema = new Schema({
     type: String,
     default: '',
   },
-  tags: [
+  inventory: [
     {
-      tagId: {
+      item: {
         type: Schema.Types.ObjectId,
-        ref: 'tag',
-      },
-      content: {
-        type: String,
+        ref: 'item',
       },
     },
   ],
-  quantity: Number,
   createdAt: {
     type: Date,
     default: Date.now,
   },
 })
 
-module.exports = Item = mongoose.model('item', ItemSchema)
+module.exports = Warehouse = mongoose.model('warehouse', WarehouseSchema)
