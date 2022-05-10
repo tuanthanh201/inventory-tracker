@@ -1,11 +1,22 @@
+input WarehouseInput {
+  name: String!
+  location: String!
+  description: String!
+  image: String!
+}
 type Warehouse {
   id: ID!
   name: String!
   location: String!
   description: String!
-  image: String!
+  image: String
   createdAt: String!
 }
 extend type Query {
+  findWarehouseById(warehouseId: ID!): Warehouse
   findAllWarehouses: [Warehouse]
+}
+extend type Mutation {
+  createWarehouse(warehouseInput: WarehouseInput!): Warehouse
+  editWarehouse(warehouseId: ID!, warehouseInput: WarehouseInput!): Warehouse
 }
