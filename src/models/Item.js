@@ -29,7 +29,9 @@ const ItemSchema = new Schema({
       },
     },
   ],
-  quantity: Number,
+  quantity: {
+    type: Number
+  },
   createdAt: {
     type: Date,
     default: Date.now,
