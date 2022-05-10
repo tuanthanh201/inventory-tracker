@@ -25,11 +25,11 @@ const findById = async (id) => {
   }
 }
 
-const findMany = async ({
+const findMany = async (
   findOptions = {},
   sortOptions = {},
-  limitOptions = 0,
-}) => {
+  limitOptions = 0
+) => {
   try {
     return await Item.find(findOptions).sort(sortOptions).limit(limitOptions)
   } catch (error) {

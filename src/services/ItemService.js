@@ -1,5 +1,5 @@
 const { DataSource } = require('apollo-datasource')
-const { AuthenticationError, UserInputError } = require('apollo-server')
+const ObjectId = require('mongodb').ObjectId
 
 const validateItemInput = require('../utils/validateItemInput')
 const { uploadBase64Image, deleteImages, getCloudFrontUrl } = require('../S3')
@@ -45,10 +45,10 @@ class ItemService extends DataSource {
 
   async findItemsByIds(itemIds) {
     try {
-      return await this.store.itemRepo.findMany({
-        findOptions: { _id: { $in: itemIds } },
-        sortOptions: { _id: -1 },
-      })
+      return await this.store.itemRepo.findMany(
+        { _id: { $in: itemIds } },
+        { _id: -1 }
+      )
     } catch (error) {
       throw new Error(error)
     }
@@ -57,13 +57,11 @@ class ItemService extends DataSource {
   async findAllItems(cursor) {
     try {
       const findOptions = cursor ? { _id: { $lt: cursor } } : {}
-      const sortOptions = { _id: -1 }
-      const limitOptions = this.limit
-      const items = await this.store.itemRepo.findMany({
+      const items = await this.store.itemRepo.findMany(
         findOptions,
-        sortOptions,
-        limitOptions,
-      })
+        { _id: -1 },
+        this.limit
+      )
       return this.getItemQuery(items)
     } catch (error) {
       throw new Error(error)
@@ -75,19 +73,14 @@ class ItemService extends DataSource {
       const searchOption = { $regex: `${name}`, $options: 'i' }
       const findOptions = cursor
         ? {
-            $and: [
-              { _id: { $lt: cursor } },
-              { $or: [{ title: searchOption }] },
-            ],
+            $and: [{ _id: { $lt: cursor } }, { $or: [{ name: searchOption }] }],
           }
-        : { title: searchOption }
-      const sortOptions = { _id: -1 }
-      const limitOptions = this.limit
-      const items = await this.store.itemRepo.findMany({
+        : { name: searchOption }
+      const items = await this.store.itemRepo.findMany(
         findOptions,
-        sortOptions,
-        limitOptions,
-      })
+        { _id: -1 },
+        this.limit
+      )
       return this.getItemQuery(items)
     } catch (error) {
       throw new Error(error)
@@ -102,13 +95,25 @@ class ItemService extends DataSource {
             $and: [{ _id: { $lt: cursor } }, { 'tags.content': searchOption }],
           }
         : { 'tags.content': searchOption }
-      const sortOptions = { _id: -1 }
-      const limitOptions = this.limit
-      const items = await this.store.itemRepo.findManyAndSort({
+      const items = await this.store.itemRepo.findMany(
         findOption,
-        sortOptions,
-        limitOptions,
-      })
+        { _id: -1 },
+        this.limit
+      )
+      return this.getItemQuery(items)
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
+  async findItemsByWarehouse(warehouseId, cursor) {
+    try {
+      const findOption = cursor
+        ? {
+            $and: [{ _id: { $lt: cursor } }, { warehouse: warehouseId }],
+          }
+        : { warehouse: ObjectId(warehouseId) }
+      const items = await this.store.itemRepo.findMany(findOption, { _id: -1 })
       return this.getItemQuery(items)
     } catch (error) {
       throw new Error(error)
@@ -142,7 +147,7 @@ class ItemService extends DataSource {
 
     // check if item has any tags
     if (tags.trim() !== '') {
-      tasg = tasg.split('')
+      tasg = tasg.split(' ')
       newItem.tasg = []
       for (let content of tags) {
         content = content.trim()
@@ -180,6 +185,8 @@ class ItemService extends DataSource {
           throw new Error('Warehouse does not exist')
         }
         item.warehouse = warehouse._id
+      } else {
+        item.warehouse = null
       }
 
       // check if itemInput has an image
@@ -193,8 +200,8 @@ class ItemService extends DataSource {
 
       // check if itemInput has any tags
       item.tags = []
-      if (itemInput.tags.trim() !== '') {
-        tags = tags.split('')
+      if (tags.trim() !== '') {
+        tags = tags.split(' ')
         for (const content of tags) {
           if (content.trim() !== '') {
             let tag = await this.store.tagRepo.findOne({ content })

@@ -26,6 +26,7 @@ extend type Query {
   findAllItems(cursor: ID): ItemQuery
   findItemsByName(name: String!, cursor: ID): ItemQuery
   findItemsByTag(tag: String!, cursor: ID): ItemQuery
+  findItemsByWarehouse(warehouseId: ID!, cursor: ID): ItemQuery
 }
 extend type Mutation {
   createItem(itemInput: ItemInput!): Item!

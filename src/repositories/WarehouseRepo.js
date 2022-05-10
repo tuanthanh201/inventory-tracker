@@ -25,6 +25,14 @@ const findById = async (id) => {
   }
 }
 
+const findOne = async (cond) => {
+  try {
+    return await Warehouse.findOne(cond)
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
 const findMany = async (
   findOptions = {},
   sortOptions = {},
@@ -51,6 +59,7 @@ module.exports = {
   insert,
   save,
   findById,
+  findOne,
   findMany,
   deleteById,
 }

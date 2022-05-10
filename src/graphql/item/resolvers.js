@@ -32,6 +32,12 @@ const resolvers = {
     async findItemsByTag(_, args, { dataSources }) {
       return await dataSources.itemService.findItemsByTag(args.tag, args.cursor)
     },
+    async findItemsByWarehouse(_, args, { dataSources }) {
+      return await dataSources.itemService.findItemsByWarehouse(
+        args.warehouseId,
+        args.cursor
+      )
+    },
   },
   Mutation: {
     async createItem(_, args, { dataSources }) {
