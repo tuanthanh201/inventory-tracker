@@ -7,6 +7,7 @@ input ItemInput {
   tags: String!
 }
 type Item {
+  warehouse: Warehouse
   id: ID!
   name: String!
   description: String!
@@ -21,13 +22,14 @@ type ItemQuery {
   last: String
 }
 extend type Query {
-  findItemById(item: ID!): Item
+  findItemById(itemId: ID!): Item
   findAllItems(cursor: ID): ItemQuery
-  findItemsByTerm(term: String!, cursor: ID): ItemQuery
+  findItemsByName(name: String!, cursor: ID): ItemQuery
   findItemsByTag(tag: String!, cursor: ID): ItemQuery
 }
 extend type Mutation {
   createItem(itemInput: ItemInput!): Item!
   editItem(itemId: ID!, itemInput: ItemInput!): Item!
-  deleteItem(itemId: ID!): String
+  assignWarehouse(itemIds: [ID]!, warehouseName: String!): String
+  deleteItems(itemIds: [ID]!): String
 }

@@ -34,18 +34,18 @@ class ItemService extends DataSource {
     return null
   }
 
-  async findItemById(id) {
+  async findItemById(itemId) {
     try {
-      return await this.store.itemRepo.findById(id)
+      return await this.store.itemRepo.findById(itemId)
     } catch (error) {
       throw new Error(error)
     }
   }
 
-  async findItemsByIds(ids) {
+  async findItemsByIds(itemIds) {
     try {
       return await this.store.itemRepo.findMany({
-        findOptions: { $in: ids },
+        findOptions: { _id: { $in: itemIds } },
         sortOptions: { _id: -1 },
       })
     } catch (error) {
@@ -208,7 +208,7 @@ class ItemService extends DataSource {
     }
   }
 
-  async assignWarehouse(itemIds, warehouseName) {
+  async assignWarehouse({ itemIds, warehouseName }) {
     try {
       const warehouse = await this.store.warehouseRepo.findOne({
         name: warehouseName,
@@ -228,9 +228,9 @@ class ItemService extends DataSource {
     }
   }
 
-  async deleteItems(itemIds) {
+  async deleteItems({ itemIds }) {
     try {
-      return await this.store.itemRepo.deleteMany({ id: { $in: itemIds } })
+      return await this.store.itemRepo.deleteMany({ _id: { $in: itemIds } })
     } catch (error) {
       throw new Error(error)
     }

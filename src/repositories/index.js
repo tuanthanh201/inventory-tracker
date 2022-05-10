@@ -1,9 +1,9 @@
 const itemRepo = require('./ItemRepo')
-const userRepo = require('./UserRepo')
+const warehouseRepo = require('./WarehouseRepo')
 const tagRepo = require('./TagRepo')
 
 module.exports = {
   itemRepo,
-  userRepo,
+  warehouseRepo,
   tagRepo,
 }

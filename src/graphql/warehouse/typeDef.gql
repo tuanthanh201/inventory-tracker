@@ -1,0 +1,11 @@
+type Warehouse {
+  id: ID!
+  name: String!
+  location: String!
+  description: String!
+  image: String!
+  createdAt: String!
+}
+extend type Query {
+  findAllWarehouses: [Warehouse]
+}

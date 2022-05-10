@@ -12,6 +12,14 @@ class WarehouseService extends DataSource {
     this.context = config.context
   }
 
+  async findWarehouseById(id) {
+    try {
+      return this.store.warehouseRepo.findById(id)
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
   async findAllWarehouses() {
     try {
       return this.store.warehouseRepo.findMany()
