@@ -6,6 +6,7 @@ const { uploadBase64Image, deleteImages, getCloudFrontUrl } = require('../S3')
 
 class ItemService extends DataSource {
   constructor({ store }) {
+    super()
     this.store = store
     this.limit = 11
   }
@@ -56,6 +57,8 @@ class ItemService extends DataSource {
   async findAllItems(cursor) {
     try {
       const findOptions = cursor ? { _id: { $lt: cursor } } : {}
+      const sortOptions = { _id: -1 }
+      const limitOptions = this.limit
       const items = await this.store.itemRepo.findMany({
         findOptions,
         sortOptions,

@@ -9,9 +9,9 @@ const TagService = require('./services/TagService')
 const WarehouseService = require('./services/WarehouseService')
 
 const dataSources = () => ({
-  ItemService: new ItemService({ store }),
+  itemService: new ItemService({ store }),
   tagService: new TagService({ store }),
-  WarehouseService: new WarehouseService({ store }),
+  warehouseService: new WarehouseService({ store }),
 })
 
 const setupApolloServer = async () => {
