@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "client": "npm start --prefix client",
     "server:dev": "env-cmd -e development nodemon --ignore client --ext js,gql src/index"
   },
   "keywords": [],
