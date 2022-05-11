@@ -14,6 +14,7 @@ type Warehouse {
 }
 extend type Query {
   findWarehouseById(warehouseId: ID!): Warehouse
+  findWarehousesByName(name: String!): [Warehouse]
   findAllWarehouses: [Warehouse]
 }
 extend type Mutation {

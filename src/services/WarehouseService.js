@@ -21,6 +21,18 @@ class WarehouseService extends DataSource {
     }
   }
 
+  async findWarehousesByName(name) {
+    try {
+      const searchOption = { $regex: `${name}`, $options: 'i' }
+      return await this.store.warehouseRepo.findMany(
+        { name: searchOption },
+        { _id: -1 }
+      )
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
   async findAllWarehouses() {
     try {
       return this.store.warehouseRepo.findMany()
@@ -34,7 +46,7 @@ class WarehouseService extends DataSource {
       validateWarehouseInput(warehouseInput)
       const { name, location, description, image } = warehouseInput
 
-      const warehouse = await this.store.warehouseRepo.findOne({name})
+      const warehouse = await this.store.warehouseRepo.findOne({ name })
       if (!!warehouse) {
         throw new UserInputError('Warehouse already exists')
       }

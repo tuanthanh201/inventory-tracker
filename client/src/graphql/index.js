@@ -19,6 +19,7 @@ export const GET_ALL_ITEMS = gql`
         warehouse {
           name
         }
+        createdAt
       }
     }
   }
@@ -63,6 +64,7 @@ export const FIND_ITEM_BY_NAME = gql`
         warehouse {
           name
         }
+        createdAt
       }
     }
   }
@@ -86,6 +88,7 @@ export const FIND_ITEM_BY_TAG = gql`
         warehouse {
           name
         }
+        createdAt
       }
     }
   }
@@ -109,6 +112,7 @@ export const FIND_ITEM_BY_WAREHOUSE = gql`
         warehouse {
           name
         }
+        createdAt
       }
     }
   }
@@ -139,6 +143,19 @@ export const GET_ALL_WAREHOUSES = gql`
 export const FIND_WAREHOUSE_BY_ID = gql`
   query ($warehouseId: ID!) {
     findWarehouseById(warehouseId: $warehouseId) {
+      id
+      name
+      description
+      location
+      image
+      createdAt
+    }
+  }
+`
+
+export const FIND_WAREHOUSE_BY_NAME = gql`
+  query ($name: String!) {
+    findWarehousesByName(name: $name) {
       id
       name
       description
@@ -213,6 +230,7 @@ export const CREATE_WAREHOUSE = gql`
     }
   }
 `
+
 export const EDIT_WAREHOUSE = gql`
   mutation ($warehouseId: ID!, $warehouseInput: WarehouseInput!) {
     editWarehouse(warehouseId: $warehouseId, warehouseInput: $warehouseInput) {

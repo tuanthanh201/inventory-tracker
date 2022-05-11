@@ -10,6 +10,9 @@ const resolvers = {
         args.warehouseId
       )
     },
+    async findWarehousesByName(_, args, { dataSources }) {
+      return await dataSources.warehouseService.findWarehousesByName(args.name)
+    },
     async findAllWarehouses(_, __, { dataSources }) {
       return await dataSources.warehouseService.findAllWarehouses()
     },
