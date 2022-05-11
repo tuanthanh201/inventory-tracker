@@ -37,7 +37,7 @@ const client = new ApolloClient({
             },
           },
           findItemsByName: {
-            keyArgs: false,
+            keyArgs: 'name',
             merge(existing, incoming) {
               let items
               if (existing?.items) {

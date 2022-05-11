@@ -26,7 +26,7 @@ export const GET_ALL_ITEMS = gql`
 
 export const FIND_ITEM_BY_ID = gql`
   query ($itemId: ID!) {
-    findItemById(itemId: $itemId) {
+    item: findItemById(itemId: $itemId) {
       id
       name
       id
