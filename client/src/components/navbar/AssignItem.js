@@ -7,7 +7,7 @@ import { ASSIGN_WAREHOUSE, GET_ALL_ITEMS } from '../../graphql'
 import SelectedItemsContext from '../../store/selectedItemsContext'
 
 const AssignItem = ({ warehouseName }) => {
-  const { items } = useContext(SelectedItemsContext)
+  const { items, emptyItems } = useContext(SelectedItemsContext)
   const [assignToWarehouse] = useMutation(ASSIGN_WAREHOUSE, {
     variables: { itemIds: items, warehouseName },
     refetchQueries: [{ query: GET_ALL_ITEMS }],
@@ -21,6 +21,7 @@ const AssignItem = ({ warehouseName }) => {
     } catch (error) {
       alertify.error(error.message)
     }
+    emptyItems()
     nProgress.done()
   }
 
