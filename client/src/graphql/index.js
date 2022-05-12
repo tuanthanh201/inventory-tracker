@@ -17,6 +17,7 @@ export const GET_ALL_ITEMS = gql`
           content
         }
         warehouse {
+          id
           name
         }
         createdAt
@@ -40,6 +41,7 @@ export const FIND_ITEM_BY_ID = gql`
         content
       }
       warehouse {
+        id
         name
       }
     }
@@ -62,6 +64,7 @@ export const FIND_ITEMS_BY_NAME = gql`
           content
         }
         warehouse {
+          id
           name
         }
         createdAt
@@ -86,6 +89,7 @@ export const FIND_ITEMS_BY_TAG = gql`
           content
         }
         warehouse {
+          id
           name
         }
         createdAt
@@ -110,6 +114,7 @@ export const FIND_ITEMS_BY_WAREHOUSE = gql`
           content
         }
         warehouse {
+          id
           name
         }
         createdAt
