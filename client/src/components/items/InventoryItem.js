@@ -7,8 +7,17 @@ import { useContext, useEffect, useState } from 'react'
 import SelectedItemsContext from '../../store/selectedItemsContext'
 
 const InventoryItem = (props) => {
-  const { id, name, warehouse, image, quantity, tags, createdAt, searchTerm } =
-    props
+  const {
+    id,
+    name,
+    warehouse,
+    image,
+    quantity,
+    tags,
+    createdAt,
+    searchTerm,
+    showSelectButton,
+  } = props
   const itemsCtx = useContext(SelectedItemsContext)
   const [selected, setSelected] = useState(itemsCtx.items.includes(id))
   const imageSrc = image ?? defaultImage
@@ -35,13 +44,15 @@ const InventoryItem = (props) => {
     <Item>
       <Item.Image src={imageSrc} as={Link} to={`/items/${id}`} />
       <Item.Content verticalAlign="top">
-        <Button
-          floated="right"
-          onClick={selectHandler}
-          circular
-          icon="check"
-          positive={selected}
-        />
+        {showSelectButton && (
+          <Button
+            floated="right"
+            onClick={selectHandler}
+            circular
+            icon="check"
+            positive={selected}
+          />
+        )}
         <Item.Header as={Link} to={`/items/${id}`}>
           <Highlighter
             searchWords={[searchTerm]}

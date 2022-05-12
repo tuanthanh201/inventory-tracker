@@ -80,6 +80,7 @@ const Items = () => {
               tags={item.tags}
               createdAt={item.createdAt}
               searchTerm={searchTerm}
+              showSelectButton
             />
           ))}
         </Item.Group>

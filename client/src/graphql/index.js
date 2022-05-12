@@ -94,9 +94,9 @@ export const FIND_ITEM_BY_TAG = gql`
   }
 `
 
-export const FIND_ITEM_BY_WAREHOUSE = gql`
-  query ($warehouseId: ID!) {
-    findItemsByWarehouse(warehouseId: $warehouseId) {
+export const FIND_ITEMS_BY_WAREHOUSE = gql`
+  query ($warehouseId: ID!, $cursor: ID) {
+    findItemsByWarehouse(warehouseId: $warehouseId, cursor: $cursor) {
       hasMore
       last
       items {
