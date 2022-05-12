@@ -22,6 +22,9 @@ const NavBar = () => {
         {pathname !== '/add/item' && (
           <Menu.Item as={Link} to="/add/item" name="Add Item" />
         )}
+        {pathname !== '/add/warehouse' && (
+          <Menu.Item as={Link} to="/add/warehouse" name="Add Warehouse" />
+        )}
         {pathname === '/' && (
           <>
             <Dropdown disabled={loading} item text="Assign Warehouse">

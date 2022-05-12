@@ -35,7 +35,7 @@ class WarehouseService extends DataSource {
 
   async findAllWarehouses() {
     try {
-      return this.store.warehouseRepo.findMany()
+      return this.store.warehouseRepo.findMany({}, { _id: -1 })
     } catch (error) {
       throw new Error(error)
     }
@@ -48,7 +48,7 @@ class WarehouseService extends DataSource {
 
       const warehouse = await this.store.warehouseRepo.findOne({ name })
       if (!!warehouse) {
-        throw new UserInputError('Warehouse already exists')
+        throw new UserInputError('A warehouse with that name already exists')
       }
 
       let newWarehouse = {

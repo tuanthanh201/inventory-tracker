@@ -13,6 +13,7 @@ import CreateItem from './components/forms/CreateItem'
 import { SelectedItemsContextProvider } from './store/selectedItemsContext'
 import './App.css'
 import 'alertifyjs/build/css/alertify.css'
+import CreateWarehouse from './components/forms/CreateWarehouse'
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Items />} />
             <Route path="/add/item" element={<CreateItem />} />
+            <Route path="/add/warehouse" element={<CreateWarehouse />} />
             <Route path="/items/:itemId" element={<SingleItem />} />
             <Route path="/warehouses" element={<Warehouses />} />
             <Route path="*" element={<Navigate to="/" />}></Route>
