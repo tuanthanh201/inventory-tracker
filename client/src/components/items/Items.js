@@ -23,7 +23,7 @@ const Items = () => {
 
   const searchHandler = async () => {
     setSearching(true)
-    const data = await searchItems({
+    await searchItems({
       variables: { name: searchTerm },
     }).catch((e) => console.error(e))
     setSearching(false)
@@ -51,7 +51,6 @@ const Items = () => {
       items = allItems?.findAllItems.items ? allItems?.findAllItems.items : []
       hasMore = allItems?.findAllItems.hasMore
     } else {
-      console.log(searchedItems?.findItemsByName.items)
       items = searchedItems?.findItemsByName.items
         ? searchedItems?.findItemsByName.items
         : []

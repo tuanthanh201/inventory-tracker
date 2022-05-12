@@ -8,7 +8,7 @@ import ConfirmModal from '../utils/ConfirmModal'
 import FadeButton from '../utils/FadeButton'
 import NotFound from '../utils/NotFound'
 import Spinner from '../spinner/Spinner'
-import EditItem from './EditItem'
+import EditItem from '../forms/EditItem'
 import ItemContent from './ItemContent'
 import { FIND_ITEM_BY_ID } from '../../graphql'
 
