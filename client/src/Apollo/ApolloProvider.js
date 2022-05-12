@@ -8,7 +8,6 @@ import _ from 'lodash'
 
 const httpLink = createHttpLink({
   uri: 'http://localhost:4000/graphql',
-  credentials: 'include',
 })
 
 const client = new ApolloClient({
