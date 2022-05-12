@@ -27,11 +27,11 @@ const DeleteItem = (props) => {
         },
       })
       alertify.success(`Deleted ${items.length} item(s)`)
-      emptyItems()
       setShowModal(false)
     } catch (error) {
       alertify.error(error.message)
     }
+    emptyItems()
   }
 
   const cancelHandler = () => {

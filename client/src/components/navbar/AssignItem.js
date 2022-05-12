@@ -16,7 +16,13 @@ const AssignItem = ({ warehouseName }) => {
   const assignHandler = async () => {
     nProgress.start()
     try {
-      await assignToWarehouse()
+      await assignToWarehouse({
+        update: (cache, payload) => {
+          for (const id of items) {
+            cache.evict(cache.identify({ __typename: 'Item', id }))
+          }
+        },
+      })
       alertify.success(`Assigned ${items.length} item(s) to ${warehouseName}`)
     } catch (error) {
       alertify.error(error.message)
