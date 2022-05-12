@@ -7,8 +7,13 @@ const validateItemInput = ({ name, description, quantity }) => {
   if (!description || description.trim() === '') {
     throw new UserInputError('Description must not be empty')
   }
-  if (quantity && isNaN(parseInt(quantity))) {
-    throw new UserInputError('Quantity must be a number')
+  if (quantity) {
+    const parsedQuantity = parseInt(quantity)
+    if (isNaN(parsedQuantity)) {
+      throw new UserInputError('Quantity must be a number')
+    } else if (parsedQuantity < 0) {
+      throw new UserInputError('Quantity must be at least 0')
+    }
   }
 }
 

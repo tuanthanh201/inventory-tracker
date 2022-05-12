@@ -147,8 +147,8 @@ class ItemService extends DataSource {
 
     // check if item has any tags
     if (tags.trim() !== '') {
-      tasg = tasg.split(' ')
-      newItem.tasg = []
+      tags = tags.split(' ')
+      newItem.tags = []
       for (let content of tags) {
         content = content.trim()
         if (content !== '') {
@@ -229,6 +229,9 @@ class ItemService extends DataSource {
 
       for (const itemId of itemIds) {
         const item = await this.store.itemRepo.findById(itemId)
+        if (!item) {
+          throw new Error('Item does not exist')
+        }
         item.warehouse = warehouse._id
         await this.store.itemRepo.save(item)
       }
