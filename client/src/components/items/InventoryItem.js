@@ -29,7 +29,7 @@ const InventoryItem = (props) => {
   let warehouseLink = 'N/A'
   if (warehouse) {
     const { name, id } = warehouse
-    warehouseLink = <Link to={`/warehouse/${id}`}>{name}</Link>
+    warehouseLink = <Link to={`/warehouses/${id}`}>{name}</Link>
   }
   return (
     <Item>

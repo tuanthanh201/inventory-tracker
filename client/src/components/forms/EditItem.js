@@ -176,7 +176,7 @@ const EditItem = ({ item, onCancel }) => {
           </Button.Group>
           <Message
             success
-            header="Item edited"
+            header="Edited item"
             content="Item has been successfully edited"
           />
           <Message

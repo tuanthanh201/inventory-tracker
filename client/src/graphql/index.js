@@ -142,7 +142,7 @@ export const GET_ALL_WAREHOUSES = gql`
 
 export const FIND_WAREHOUSE_BY_ID = gql`
   query ($warehouseId: ID!) {
-    findWarehouseById(warehouseId: $warehouseId) {
+    warehouse: findWarehouseById(warehouseId: $warehouseId) {
       id
       name
       description
