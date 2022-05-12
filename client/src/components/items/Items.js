@@ -3,7 +3,7 @@ import { useLazyQuery, useQuery } from '@apollo/client'
 import { Button, Input, Item } from 'semantic-ui-react'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-import { FIND_ITEM_BY_NAME, GET_ALL_ITEMS } from '../../graphql'
+import { FIND_ITEMS_BY_NAME, GET_ALL_ITEMS } from '../../graphql'
 import InventoryItem from './InventoryItem'
 import Spinner from '../spinner/Spinner'
 
@@ -19,7 +19,7 @@ const Items = () => {
   const [
     searchItems,
     { data: searchedItems, fetchMore: fetchMoreSearchedItems },
-  ] = useLazyQuery(FIND_ITEM_BY_NAME)
+  ] = useLazyQuery(FIND_ITEMS_BY_NAME)
 
   const searchHandler = async () => {
     setSearching(true)

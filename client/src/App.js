@@ -15,6 +15,7 @@ import './App.css'
 import 'alertifyjs/build/css/alertify.css'
 import CreateWarehouse from './components/forms/CreateWarehouse'
 import SingleWarehouse from './components/singleWarehouse/SingleWarehouse'
+import TaggedItems from './components/items/TaggedItems'
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
               element={<SingleWarehouse />}
             />
             <Route path="/warehouses" element={<Warehouses />} />
+            <Route path="/tag/:tag" element={<TaggedItems />} />
             <Route path="*" element={<Navigate to="/" />}></Route>
           </Routes>
         </Container>

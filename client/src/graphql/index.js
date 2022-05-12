@@ -46,7 +46,7 @@ export const FIND_ITEM_BY_ID = gql`
   }
 `
 
-export const FIND_ITEM_BY_NAME = gql`
+export const FIND_ITEMS_BY_NAME = gql`
   query ($name: String!, $cursor: ID) {
     findItemsByName(name: $name, cursor: $cursor) {
       hasMore
@@ -70,7 +70,7 @@ export const FIND_ITEM_BY_NAME = gql`
   }
 `
 
-export const FIND_ITEM_BY_TAG = gql`
+export const FIND_ITEMS_BY_TAG = gql`
   query ($tag: String!, $cursor: ID) {
     findItemsByTag(tag: $tag, cursor: $cursor) {
       hasMore

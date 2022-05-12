@@ -69,7 +69,7 @@ const InventoryItem = (props) => {
           {tags.map((tag) => (
             <Label
               as={Link}
-              to={`/items/tags/${tag.content}`}
+              to={`/tag/${tag.content}`}
               key={tag.id}
               id={tag.id}
               content={tag.content}
