@@ -4,6 +4,7 @@ const SelectedItemsContext = createContext({
   items: [],
   selectItem: (itemId) => {},
   removeItem: (itemId) => {},
+  emptyItems: () => {},
 })
 
 export const SelectedItemsContextProvider = ({ children }) => {
@@ -17,10 +18,15 @@ export const SelectedItemsContextProvider = ({ children }) => {
     setItems((currentItems) => currentItems.filter((item) => item !== itemId))
   }
 
+  const emptyItems = () => {
+    setItems([])
+  }
+
   const value = {
     items,
     selectItem,
     removeItem,
+    emptyItems,
   }
 
   return (

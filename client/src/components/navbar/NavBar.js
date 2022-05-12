@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { Dropdown, Menu } from 'semantic-ui-react'
 import { GET_ALL_WAREHOUSES } from '../../graphql'
 import AssignItem from './AssignItem'
+import DeleteItem from './DeleteItem'
 
 const NavBar = () => {
   const { pathname } = useLocation()
@@ -34,11 +35,7 @@ const NavBar = () => {
                 ))}
               </Dropdown.Menu>
             </Dropdown>
-            <Menu.Item
-              style={{ cursor: 'pointer' }}
-              name="Delete Items"
-              onClick={() => console.log('delete items')}
-            />
+            <DeleteItem />
           </>
         )}
       </Menu.Menu>
