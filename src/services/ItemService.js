@@ -72,9 +72,7 @@ class ItemService extends DataSource {
     try {
       const searchOption = { $regex: `${name}`, $options: 'i' }
       const findOptions = cursor
-        ? {
-            $and: [{ _id: { $lt: cursor } }, { $or: [{ name: searchOption }] }],
-          }
+        ? { $and: [{ _id: { $lt: cursor } }, { name: searchOption }] }
         : { name: searchOption }
       const items = await this.store.itemRepo.findMany(
         findOptions,
@@ -243,7 +241,8 @@ class ItemService extends DataSource {
 
   async deleteItems({ itemIds }) {
     try {
-      return await this.store.itemRepo.deleteMany({ _id: { $in: itemIds } })
+      await this.store.itemRepo.deleteMany({ _id: { $in: itemIds } })
+      return 'Deleted successfully'
     } catch (error) {
       throw new Error(error)
     }

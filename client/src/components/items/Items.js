@@ -36,7 +36,7 @@ const Items = () => {
     } else {
       fetchMoreSearchedItems({
         variables: {
-          term: searchTerm,
+          name: searchTerm,
           cursor: searchedItems.findItemsByName.last,
         },
       })
@@ -56,6 +56,7 @@ const Items = () => {
         : []
       hasMore = searchedItems?.findItemsByName.hasMore
     }
+    searched && console.log(items)
     itemsContent = (
       <InfiniteScroll
         dataLength={items.length}
