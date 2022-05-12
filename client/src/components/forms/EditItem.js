@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client'
 import nProgress from 'nprogress'
 import { useEffect, useState } from 'react'
 import { Button, Form, Message, Segment } from 'semantic-ui-react'
-import { EDIT_ITEM } from '../../graphql'
+import { EDIT_ITEM, GET_ALL_TAGS } from '../../graphql'
 import useInput from '../../hooks/useInput'
 import useTags from '../../hooks/useTags'
 import Spinner from '../spinner/Spinner'
@@ -67,9 +67,10 @@ const EditItem = ({ item, onCancel }) => {
       quantity: parseInt(quantity),
       warehouse,
     }
-    await editItem({ variables: { itemId: item.id, itemInput } }).catch(
-      (error) => console.error(error)
-    )
+    await editItem({
+      variables: { itemId: item.id, itemInput },
+      refetchQueries: [{ query: GET_ALL_TAGS }],
+    }).catch((error) => console.error(error))
     nProgress.done()
   }
 
