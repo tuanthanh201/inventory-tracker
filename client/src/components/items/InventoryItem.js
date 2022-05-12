@@ -3,7 +3,7 @@ import Highlighter from 'react-highlight-words'
 import defaultImage from '../../utils/getDefaultImage'
 import getDate from '../../utils/getDate'
 import { Button, Item, Label } from 'semantic-ui-react'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import SelectedItemsContext from '../../store/selectedItemsContext'
 
 const InventoryItem = (props) => {
@@ -12,6 +12,10 @@ const InventoryItem = (props) => {
   const itemsCtx = useContext(SelectedItemsContext)
   const [selected, setSelected] = useState(itemsCtx.items.includes(id))
   const imageSrc = image ?? defaultImage
+
+  useEffect(() => {
+    setSelected(itemsCtx.items.includes(id))
+  }, [itemsCtx.items, id])
 
   const selectHandler = () => {
     if (selected) {

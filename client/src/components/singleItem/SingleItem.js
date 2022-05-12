@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import nProgress from 'nprogress'
 import { Button, Menu } from 'semantic-ui-react'
 
@@ -10,7 +10,8 @@ import NotFound from '../utils/NotFound'
 import Spinner from '../spinner/Spinner'
 import EditItem from '../forms/EditItem'
 import ItemContent from './ItemContent'
-import { FIND_ITEM_BY_ID } from '../../graphql'
+import { DELETE_ITEMS, FIND_ITEM_BY_ID, GET_ALL_ITEMS } from '../../graphql'
+import alertify from 'alertifyjs'
 
 const SingleItem = () => {
   const { itemId } = useParams()
@@ -19,6 +20,10 @@ const SingleItem = () => {
   const [editMode, setEditMode] = useState(false)
   const { loading, data } = useQuery(FIND_ITEM_BY_ID, {
     variables: { itemId },
+  })
+  const [deleteItem] = useMutation(DELETE_ITEMS, {
+    variables: { itemIds: [itemId] },
+    refetchQueries: [{ query: GET_ALL_ITEMS }],
   })
 
   const toggleEditModeHandler = () => {
@@ -31,7 +36,12 @@ const SingleItem = () => {
 
   const confirmHandler = async () => {
     nProgress.start()
-    console.log('delete item')
+    try {
+      await deleteItem()
+      alertify.success('Deleted item')
+    } catch (error) {
+      alertify.error('error.message')
+    }
     nProgress.done()
     navigate('/')
   }
