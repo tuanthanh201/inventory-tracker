@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "client": "npm start --prefix client",
-    "server:dev": "env-cmd -e development nodemon --ignore client --ext js,gql src/index"
+    "server:dev": "env-cmd -e development nodemon --ignore client --ext js,gql src/index",
+    "server": "node src/index",
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
@@ -15,6 +17,7 @@
     "apollo-server": "^3.7.0",
     "apollo-server-express": "^3.7.0",
     "aws-sdk": "^2.1130.0",
+    "concurrently": "^7.1.0",
     "cors": "^2.8.5",
     "dataloader": "^2.1.0",
     "fs": "0.0.1-security",
