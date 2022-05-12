@@ -20,6 +20,11 @@ const DeleteItem = (props) => {
       await deleteItems({
         variables: { itemIds: items },
         refetchQueries: [{ query: GET_ALL_ITEMS }],
+        update: (cache, payload) => {
+          for (const id of items) {
+            cache.evict(cache.identify({ id, __typename: 'Item' }))
+          }
+        },
       })
       alertify.success(`Deleted ${items.length} item(s)`)
       emptyItems()
