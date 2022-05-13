@@ -9,6 +9,8 @@ const ItemService = require('./services/ItemService')
 const TagService = require('./services/TagService')
 const WarehouseService = require('./services/WarehouseService')
 
+const WarehouseLoader = require('./graphql/loaders/WarehouseLoader')
+
 const dataSources = () => ({
   itemService: new ItemService({ store }),
   tagService: new TagService({ store }),
@@ -25,6 +27,7 @@ const setupApolloServer = async () => {
     context: ({ req, res }) => ({
       req,
       res,
+      warehouseLoader: WarehouseLoader(dataSources().warehouseService),
     }),
   })
 
@@ -44,7 +47,9 @@ const setupApolloServer = async () => {
   if (process.env.ENV === 'PRODUCTION') {
     app.use(express.static(path.resolve(__dirname, '..', 'client', 'build')))
     app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, '..', 'client', 'build', 'index.html'))
+      res.sendFile(
+        path.resolve(__dirname, '..', 'client', 'build', 'index.html')
+      )
     })
   }
 

@@ -21,6 +21,14 @@ class WarehouseService extends DataSource {
     }
   }
 
+  async findWarehousesByIds(warehouseIds) {
+    try {
+      return this.store.warehouseRepo.findMany({ _id: { $in: warehouseIds } })
+    } catch (error) {
+      throw new Error(error)
+    }
+  }
+
   async findWarehousesByName(name) {
     try {
       const searchOption = { $regex: `${name}`, $options: 'i' }

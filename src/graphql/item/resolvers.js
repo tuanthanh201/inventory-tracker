@@ -10,9 +10,10 @@ const resolvers = {
     image(parent, _, { dataSources }) {
       return dataSources.itemService.getImageUrl(parent.image)
     },
-    async warehouse(parent, _, { dataSources }) {
-      return await dataSources.warehouseService.findWarehouseById(
-        parent.warehouse
+    async warehouse(parent, _, { dataSources, warehouseLoader }) {
+      return await warehouseLoader.load(
+        parent.warehouse,
+        dataSources.warehouseService
       )
     },
   },
