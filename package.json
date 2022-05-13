@@ -7,7 +7,7 @@
     "client": "npm start --prefix client",
     "server:dev": "env-cmd -e development nodemon --ignore client --ext js,gql src/index",
     "server": "env-cmd -e development node src/index",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "start": "env-cmd -e production node src/index"
   },
   "keywords": [],
   "author": "",
