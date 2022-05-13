@@ -25,9 +25,16 @@ const client = new ApolloClient({
             merge(existing, incoming) {
               let items
               if (existing?.items) {
-                items = [...existing?.items, ...incoming.items]
+                items = _.cloneDeep(existing.items)
               } else {
-                items = [...incoming.items]
+                items = []
+              }
+              const itemIds = existing?.items.map((item) => item.__ref)
+              const itemsSet = new Set(itemIds)
+              for (const item of incoming.items) {
+                if (!itemsSet.has(item.__ref)) {
+                  items.push(item)
+                }
               }
               return {
                 ...incoming,
@@ -40,9 +47,16 @@ const client = new ApolloClient({
             merge(existing, incoming) {
               let items
               if (existing?.items) {
-                items = [...existing?.items, ...incoming.items]
+                items = _.cloneDeep(existing.items)
               } else {
-                items = [...incoming.items]
+                items = []
+              }
+              const itemIds = existing?.items.map((item) => item.__ref)
+              const itemsSet = new Set(itemIds)
+              for (const item of incoming.items) {
+                if (!itemsSet.has(item.__ref)) {
+                  items.push(item)
+                }
               }
               return {
                 ...incoming,

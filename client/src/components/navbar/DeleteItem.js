@@ -23,6 +23,7 @@ const DeleteItem = (props) => {
         update: (cache, payload) => {
           for (const id of items) {
             cache.evict(cache.identify({ id, __typename: 'Item' }))
+            cache.gc()
           }
         },
       })
