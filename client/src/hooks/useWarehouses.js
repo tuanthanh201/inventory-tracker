@@ -9,12 +9,13 @@ const useWarehouses = () => {
   return {
     loading,
     warehouses: useMemo(() => {
-      const formattedWarehouses = data?.findAllWarehouses?.map((warehouse) => ({
-        key: warehouse.id,
-        text: warehouse.name,
-        value: warehouse.name,
-        icon: 'warehouse',
-      }))
+      const formattedWarehouses =
+        data?.findAllWarehouses?.map((warehouse) => ({
+          key: warehouse.id,
+          text: warehouse.name,
+          value: warehouse.name,
+          icon: 'warehouse',
+        })) ?? []
       formattedWarehouses.unshift({
         key: uuidv4(),
         text: 'None',

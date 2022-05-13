@@ -1,6 +1,6 @@
 const DataLoader = require('dataloader')
 
-const WarehouseLoader = (warehouseService) => {
+const WarehouseLoader = (warehouseService) =>
   new DataLoader(async (warehouseIds) => {
     const warehouses = await warehouseService.findWarehousesByIds(warehouseIds)
 
@@ -11,6 +11,5 @@ const WarehouseLoader = (warehouseService) => {
 
     return warehouseIds.map((warehouseId) => warehouseMap[warehouseId])
   })
-}
 
 module.exports = WarehouseLoader
