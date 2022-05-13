@@ -11,10 +11,12 @@ const resolvers = {
       return dataSources.itemService.getImageUrl(parent.image)
     },
     async warehouse(parent, _, { dataSources, warehouseLoader }) {
-      return await warehouseLoader.load(
-        parent.warehouse,
-        dataSources.warehouseService
-      )
+      if (parent.warehouse) {
+        return await warehouseLoader.load(
+          parent.warehouse,
+          dataSources.warehouseService
+        )
+      }
     },
   },
   Query: {
