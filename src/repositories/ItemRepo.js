@@ -37,14 +37,6 @@ const findMany = async (
   }
 }
 
-const deleteById = async (id) => {
-  try {
-    return await Item.findByIdAndDelete(id)
-  } catch (error) {
-    throw new Error(error)
-  }
-}
-
 const deleteMany = async (cond) => {
   try {
     return await Item.deleteMany(cond)
@@ -58,6 +50,5 @@ module.exports = {
   save,
   findById,
   findMany,
-  deleteById,
   deleteMany,
 }

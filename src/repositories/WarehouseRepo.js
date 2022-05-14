@@ -47,19 +47,10 @@ const findMany = async (
   }
 }
 
-const deleteById = async (id) => {
-  try {
-    return await Warehouse.findByIdAndDelete(id)
-  } catch (error) {
-    throw new Error(Error)
-  }
-}
-
 module.exports = {
   insert,
   save,
   findById,
   findOne,
   findMany,
-  deleteById,
 }
