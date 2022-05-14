@@ -139,7 +139,7 @@ class ItemService extends DataSource {
     if (warehouse.trim() !== '') {
       warehouse = await this.store.warehouseRepo.findOne({ name: warehouse })
       if (!warehouse) {
-        throw new Error('Warehouse does note exist')
+        throw new Error('Warehouse does not exist')
       }
       newItem.warehouse = warehouse._id
     }
