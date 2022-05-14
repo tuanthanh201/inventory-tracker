@@ -30,7 +30,8 @@ const ItemSchema = new Schema({
     },
   ],
   quantity: {
-    type: Number
+    type: Number,
+    required: true,
   },
   createdAt: {
     type: Date,
