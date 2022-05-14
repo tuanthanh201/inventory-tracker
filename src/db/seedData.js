@@ -8,8 +8,7 @@ const itemData = require('./seedData/items')
 const tagData = require('./seedData/tags')
 const warehouseData = require('./seedData/warehouses')
 
-const MONGO_CONNECTION_STRING =
-  'mongodb+srv://admin:2t3OrFsy7dDNhdmt@cluster0.q6ir1.mongodb.net/testDatabase?retryWrites=true&w=majority'
+const MONGO_CONNECTION_STRING = '<CONNECTION_STRING>'
 
 mongoose
   .connect(MONGO_CONNECTION_STRING, {
