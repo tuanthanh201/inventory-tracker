@@ -13,7 +13,6 @@ const areWarehousesEqual = (warehouse1, warehouse2) => {
       if (key === 'image' && sameImage(warehouse1[key], warehouse2[key])) {
         continue
       }
-      console.log('KEY', key)
       return false
     }
   }
