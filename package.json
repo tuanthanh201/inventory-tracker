@@ -10,6 +10,8 @@
     "seed": "node src/db/seedData",
     "test:unit": "jest unit --verbose",
     "test:int": "env-cmd -e test jest int --verbose",
+    "test:coverage": "env-cmd -e test jest --coverage",
+    "test": "env-cmd -e test jest --runInBand --verbose",
     "start": "node src/index"
   },
   "jest": {

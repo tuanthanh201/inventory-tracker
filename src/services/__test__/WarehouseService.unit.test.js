@@ -218,3 +218,135 @@ describe('WarehouseService.createWarehouse', () => {
     })
   })
 })
+
+describe('WarehouseService.editWarehouse', () => {
+  it('Fails if name is empty', async () => {
+    // given
+    const args = {
+      warehouseId: 1,
+      warehouseInput: { name: '' },
+    }
+
+    // then
+    await expect(
+      async () => await warehouseService.createWarehouse(args)
+    ).rejects.toThrow('Name must not be empty')
+  })
+
+  it('Fails if location is empty', async () => {
+    // given
+    const args = {
+      warehouseId: 1,
+      warehouseInput: { name: 'Warehouse', location: '' },
+    }
+
+    // then
+    await expect(
+      async () => await warehouseService.createWarehouse(args)
+    ).rejects.toThrow('Location must not be empty')
+  })
+
+  it('Fails if description is empty', async () => {
+    // given
+    const args = {
+      warehouseId: 1,
+      warehouseInput: {
+        name: 'Warehouse',
+        location: 'A1B 2C3',
+        description: '',
+      },
+    }
+
+    // then
+    await expect(
+      async () => await warehouseService.createWarehouse(args)
+    ).rejects.toThrow('Description must not be empty')
+  })
+
+  it('Fails if warehouse does not exist', async () => {
+    // given
+    const args = {
+      warehouseId: 1,
+      warehouseInput: {
+        name: 'Warehouse',
+        location: 'A1B 2C3',
+        description: 'Description',
+      },
+    }
+    mockStore.warehouseRepo.findById.mockReturnValueOnce(undefined)
+
+    // then
+    await expect(
+      async () => await warehouseService.editWarehouse(args)
+    ).rejects.toThrow('Warehouse does not exist')
+  })
+
+  it('Edits warehouse', async () => {
+    // given
+    const args = {
+      warehouseId: 1,
+      warehouseInput: {
+        name: 'Warehouse',
+        location: 'A1B 2C3',
+        description: 'Description',
+        image: '',
+      },
+    }
+    const expectedWarehouse = {
+      name: args.warehouseInput.name,
+      location: args.warehouseInput.location,
+      description: args.warehouseInput.description,
+    }
+    const oldWarehouse = {
+      name: 'Old name',
+      location: 'Old location',
+      description: 'Old description',
+    }
+    mockStore.warehouseRepo.findById.mockReturnValueOnce(oldWarehouse)
+    mockStore.warehouseRepo.save.mockReturnValueOnce(expectedWarehouse)
+
+    // when
+    const warehouse = await warehouseService.editWarehouse(args)
+
+    // then
+    expect(warehouse).toStrictEqual(expectedWarehouse)
+    expect(mockStore.warehouseRepo.save).toHaveBeenLastCalledWith(
+      expectedWarehouse
+    )
+  })
+
+  it('Uploads image to S3', async () => {
+    // given
+    const args = {
+      warehouseInput: {
+        name: 'Warehouse',
+        location: 'A1B 2C3',
+        description: 'A new warehouse',
+        image: 'base64Image',
+      },
+    }
+    const expectedWarehouse = {
+      name: args.warehouseInput.name,
+      location: args.warehouseInput.location,
+      description: args.warehouseInput.description,
+      image: 'someKey',
+    }
+    const oldWarehouse = {
+      name: 'Old name',
+      location: 'Old location',
+      description: 'Old description',
+      image: '',
+    }
+    mockStore.warehouseRepo.findById.mockReturnValueOnce(oldWarehouse)
+    mockStore.warehouseRepo.save.mockReturnValueOnce(expectedWarehouse)
+
+    // when
+    const warehouse = await warehouseService.editWarehouse(args)
+
+    // then
+    expect(warehouse).toEqual(expectedWarehouse)
+    expect(mockStore.warehouseRepo.save).toHaveBeenLastCalledWith({
+      ...expectedWarehouse,
+    })
+  })
+})
