@@ -108,10 +108,17 @@ class ItemService extends DataSource {
     try {
       const findOption = cursor
         ? {
-            $and: [{ _id: { $lt: cursor } }, { warehouse: warehouseId }],
+            $and: [
+              { _id: { $lt: cursor } },
+              { warehouse: ObjectId(warehouseId) },
+            ],
           }
         : { warehouse: ObjectId(warehouseId) }
-      const items = await this.store.itemRepo.findMany(findOption, { _id: -1 })
+      const items = await this.store.itemRepo.findMany(
+        findOption,
+        { _id: -1 },
+        this.limit
+      )
       return this.getItemQuery(items)
     } catch (error) {
       throw new Error(error)
