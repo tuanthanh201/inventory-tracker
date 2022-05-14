@@ -1,4 +1,5 @@
 import { useMutation } from '@apollo/client'
+import alertify from 'alertifyjs'
 import nProgress from 'nprogress'
 import { useState } from 'react'
 import { Button, Form, Message, Segment } from 'semantic-ui-react'
@@ -6,7 +7,7 @@ import { EDIT_WAREHOUSE } from '../../graphql'
 import useInput from '../../hooks/useInput'
 import { toBase64 } from '../../utils/imageToBase64'
 
-const EditWarehouse = ({ warehouse, onCancel }) => {
+const EditWarehouse = ({ warehouse, onCancel, setEditMode }) => {
   const [image, setImage] = useState()
   const [showImageField, setShowImageField] = useState(false)
   const {
@@ -33,7 +34,7 @@ const EditWarehouse = ({ warehouse, onCancel }) => {
     valueChangeHandler: locationChangeHandler,
     valueBlurHandler: locationBlurHandler,
   } = useInput((location) => location.trim() !== '', warehouse.location)
-  const [editWarehouse, { loading, data, error }] = useMutation(EDIT_WAREHOUSE)
+  const [editWarehouse, { loading, error }] = useMutation(EDIT_WAREHOUSE)
 
   const submitHandler = async (e) => {
     e.preventDefault()
@@ -48,9 +49,15 @@ const EditWarehouse = ({ warehouse, onCancel }) => {
       image: imageBase64,
       location,
     }
-    await editWarehouse({
-      variables: { warehouseId: warehouse.id, warehouseInput },
-    }).catch((error) => console.error(error))
+    try {
+      await editWarehouse({
+        variables: { warehouseId: warehouse.id, warehouseInput },
+      })
+      alertify.success(`${name} has been updated`)
+      setEditMode(false)
+    } catch (error) {
+      console.error(error)
+    }
     nProgress.done()
   }
 
@@ -65,7 +72,7 @@ const EditWarehouse = ({ warehouse, onCancel }) => {
   return (
     <>
       <Segment attached="bottom">
-        <Form success={!!data} error={!!error}>
+        <Form error={!!error}>
           <Form.Input
             fluid
             required

@@ -83,6 +83,7 @@ const SingleItem = () => {
       {!editMode && <ItemContent item={item} />}
       {editMode && (
         <EditItem
+          setEditMode={setEditMode}
           editMode={editMode}
           item={item}
           onCancel={() => setEditMode(false)}

@@ -93,6 +93,7 @@ const SingleWarehouse = () => {
       {!editMode && <WarehouseContent warehouse={warehouse} />}
       {editMode && (
         <EditWarehouse
+          setEditMode={setEditMode}
           editMode={editMode}
           warehouse={warehouse}
           onCancel={() => setEditMode(false)}

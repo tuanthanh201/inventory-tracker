@@ -1,6 +1,7 @@
-import { useMutation } from '@apollo/client'
-import nProgress from 'nprogress'
 import { useEffect, useState } from 'react'
+import { useMutation } from '@apollo/client'
+import alertify from 'alertifyjs'
+import nProgress from 'nprogress'
 import { Button, Form, Message, Segment } from 'semantic-ui-react'
 import { EDIT_ITEM, GET_ALL_TAGS } from '../../graphql'
 import useInput from '../../hooks/useInput'
@@ -10,7 +11,7 @@ import { toBase64 } from '../../utils/imageToBase64'
 import useWarehouses from '../../hooks/useWarehouses'
 import validateQuantity from '../../utils/validateQuantity'
 
-const EditItem = ({ item, onCancel }) => {
+const EditItem = ({ item, onCancel, setEditMode }) => {
   const itemTags = item.tags.map((tag) => tag.content)
   const { loading: tagsLoading, tags } = useTags()
   const { loading: warehousesLoading, warehouses } = useWarehouses()
@@ -40,7 +41,7 @@ const EditItem = ({ item, onCancel }) => {
     valueChangeHandler: quantityChangeHandler,
     valueBlurHandler: quantityBlurHandler,
   } = useInput(validateQuantity, item.quantity)
-  const [editItem, { loading, data, error }] = useMutation(EDIT_ITEM)
+  const [editItem, { loading, error }] = useMutation(EDIT_ITEM)
 
   useEffect(() => {
     if (tags) {
@@ -67,10 +68,16 @@ const EditItem = ({ item, onCancel }) => {
       quantity: parseInt(quantity),
       warehouse,
     }
-    await editItem({
-      variables: { itemId: item.id, itemInput },
-      refetchQueries: [{ query: GET_ALL_TAGS }],
-    }).catch((error) => console.error(error))
+    try {
+      await editItem({
+        variables: { itemId: item.id, itemInput },
+        refetchQueries: [{ query: GET_ALL_TAGS }],
+      })
+      alertify.success(`${name} has been updated`)
+      setEditMode(false)
+    } catch (error) {
+      console.error(error)
+    }
     nProgress.done()
   }
 
@@ -89,7 +96,7 @@ const EditItem = ({ item, onCancel }) => {
   return (
     <>
       <Segment attached="bottom">
-        <Form success={!!data} error={!!error}>
+        <Form error={!!error}>
           <Form.Input
             fluid
             required
@@ -174,11 +181,6 @@ const EditItem = ({ item, onCancel }) => {
               Save
             </Button>
           </Button.Group>
-          <Message
-            success
-            header="Edited item"
-            content="Item has been successfully edited"
-          />
           <Message
             error
             header="Failed to edit item"
