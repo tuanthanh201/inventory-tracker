@@ -7,8 +7,8 @@
     "client": "npm start --prefix client",
     "server:dev": "env-cmd -e development nodemon --ignore client --ext js,gql src/index",
     "server:test": "env-cmd -e test nodemon --ignore client --ext js,gql src/index",
-    "server": "env-cmd -e development node src/index",
     "seed": "node src/db/seedData",
+    "test:unit": "jest unit --verbose",
     "start": "node src/index"
   },
   "keywords": [],
