@@ -9,7 +9,6 @@ const { GET_ALL_TAGS } = require('./graphql')
 
 const Tag = require('../../../models/Tag')
 const connectToDB = require('../../../db/mongoose')
-const { areTagArraysEqual } = require('./utils')
 
 const httpLink = createHttpLink({
   uri: `http://localhost:${process.env.SERVER_PORT}/graphql`,
