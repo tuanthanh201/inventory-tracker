@@ -5,7 +5,8 @@ Link to web app: :link: https://shopify-backend-challenge.tuanthanh201.repl.co
 
 Link to Replit: :link: https://replit.com/@tuanthanh201/Shopify-backend-challenge#.replit
 
-https://user-images.githubusercontent.com/55332021/168425394-109eb265-0edc-4956-b29c-663daa08c13b.mp4
+https://user-images.githubusercontent.com/55332021/168461180-a5e3f59c-0406-409e-958f-ee060bc4644c.mp4
+
 
 ## 2/ Features:
 - Basic CRUD functionality for inventory items :ballot_box_with_check::ballot_box_with_check::ballot_box_with_check:
