@@ -1,9 +1,9 @@
 ﻿# Shopify-backend-challenge
 
 ## 1/ Demo:
-Link to web app: https://shopify-backend-challenge.tuanthanh201.repl.co
+Link to web app: :link: https://shopify-backend-challenge.tuanthanh201.repl.co
 
-Link to Replit: https://replit.com/@tuanthanh201/Shopify-backend-challenge#.replit
+Link to Replit: :link: https://replit.com/@tuanthanh201/Shopify-backend-challenge#.replit
 
 https://user-images.githubusercontent.com/55332021/168425394-109eb265-0edc-4956-b29c-663daa08c13b.mp4
 
@@ -20,5 +20,5 @@ https://user-images.githubusercontent.com/55332021/168425394-109eb265-0edc-4956-
 
 ## 3/ Testing:
 
-### Backend: Unit tests + Integration tests (Jest)
+### Backend: Unit tests + Integration tests (Jest) :heavy_check_mark::heavy_check_mark::heavy_check_mark:
 ![Screenshot 2022-05-14 052845](https://user-images.githubusercontent.com/55332021/168423104-27247097-1704-45c3-b7a3-81cbf40e28a3.jpg)
