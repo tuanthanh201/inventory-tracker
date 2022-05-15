@@ -13,7 +13,7 @@ https://user-images.githubusercontent.com/55332021/168461180-a5e3f59c-0406-409e-
 - Ability to create/edit/view warehouses :office::office:, as well as the ability to assign items to warehouses
 - Ability to create tags and add them to items :bookmark::bookmark::bookmark: to make managing items easier
 - Enables searching for items and warehouses by names or by tags :mag::mag:
-- Allows users to upload images for items and warehouses for better visualization :camera::camera::camera:
+- Allows users to upload images for items and warehouses :camera::camera::camera: for better visualization
 - Supports bulk assign items to warehouses, as well as bulk delete :exclamation::exclamation::exclamation:
 - Code is covered by unit and integration tests :100::100:
 - Backend: MongoDB, Express, Nodejs, GraphQL, Apollo Server :sunglasses::sunglasses::sunglasses:
