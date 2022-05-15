@@ -7,7 +7,7 @@ Link to Replit: https://replit.com/@tuanthanh201/Shopify-backend-challenge#.repl
 
 https://user-images.githubusercontent.com/55332021/168425394-109eb265-0edc-4956-b29c-663daa08c13b.mp4
 
-# 2/ Features:
+## 2/ Features:
 - Basic CRUD functionality for inventory items :ballot_box_with_check::ballot_box_with_check::ballot_box_with_check:
 - Ability to create/edit/view warehouses :office::office:, as well as the ability to assign items to warehouses
 - Ability to create tags and add them to items :bookmark::bookmark::bookmark: to make managing items easier
@@ -18,7 +18,7 @@ https://user-images.githubusercontent.com/55332021/168425394-109eb265-0edc-4956-
 - Backend: MongoDB, Express, Nodejs, GraphQL, Apollo Server :sunglasses::sunglasses::sunglasses:
 - Frontend: React, Apollo Client :+1::+1:
 
-# 3/ Testing:
+## 3/ Testing:
 
-## Backend: Unit tests + Integration tests (Jest)
+### Backend: Unit tests + Integration tests (Jest)
 ![Screenshot 2022-05-14 052845](https://user-images.githubusercontent.com/55332021/168423104-27247097-1704-45c3-b7a3-81cbf40e28a3.jpg)
