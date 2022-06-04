@@ -1,4 +1,4 @@
-﻿# Inventory Tracker
+# Inventory Tracker
 
 ## 1/ Demo:
 Link to web app: :link: https://inventory-tracker.tuanthanh201.repl.co/
