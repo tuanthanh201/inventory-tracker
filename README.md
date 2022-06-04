@@ -1,11 +1,9 @@
 ﻿# Inventory Tracker
 
 ## 1/ Demo:
-Link to web app: :link: https://shopify-backend-challenge.tuanthanh201.repl.co
+Link to web app: :link: https://inventory-tracker.tuanthanh201.repl.co/
 
-Link to Replit: :link: https://replit.com/@tuanthanh201/Shopify-backend-challenge#.replit
-
-https://user-images.githubusercontent.com/55332021/168461180-a5e3f59c-0406-409e-958f-ee060bc4644c.mp4
+https://user-images.githubusercontent.com/55332021/171974564-c70b0e58-f683-4e74-a5b5-88c651eb7226.mp4
 
 
 ## 2/ Features:
